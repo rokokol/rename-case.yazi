@@ -1,0 +1,41 @@
+name: build
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      ref:
+        type: string
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  nix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.ref }}
+      - uses: cachix/install-nix-action@v31
+      - run: nix build --no-write-lock-file
+      - run: nix flake check --no-write-lock-file
+      - run: nix fmt -- --ci
+
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.ref }}
+      - uses: cachix/install-nix-action@v31
+      - run: ./vendor-sync.sh check
+      - run: ./check-pins.sh
+      - run: nix build --no-write-lock-file .#checks.x86_64-linux.lint .#checks.x86_64-linux.nix-lint

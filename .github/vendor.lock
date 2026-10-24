@@ -1,0 +1,9 @@
+# Git copies and URL pins are recorded here; vendor-sync.sh help describes each line
+# Never edit a copy in place: change its source and let the cascade bring it back. How it
+# works: references/bump-cascade.md in https://github.com/rokokol/ci-skill
+vendor-sync.sh rokokol/ci-skill templates/vendor-sync.sh 500307ed9ea72875ca08da769829089069c2a747 1095262478484520267758a24b7ea9e057ca5204
+check-pins.sh rokokol/ci-skill templates/check-pins.sh 500307ed9ea72875ca08da769829089069c2a747 c86f8288606d532f7982206eea8e8a310315d7f6
+check-nix.sh rokokol/nix-best-practices-skill check-nix.sh a1238b481d5f377ae8eb24fe9b039d39eb0956e9 174eead973a39475c5204fbe5771c5c746b64224
+check-changelog.sh rokokol/versioning-skill check-changelog.sh 7b23556ab1c61272ba5ec30c94f91824644b3610 103e3395a394fe6d39b8d7e0989107d9aa01c2e8
+check-prose.sh rokokol/create-readme-skill check-prose.sh 613639eb6ec2a73209bb1f7d1ba103e9d1c90db7 0438eca6ca155baf2b5fbbd8157747ec3619b579
+.github/workflows/vendor-sync.yml rokokol/ci-skill templates/github/workflows/vendor-sync.yml 500307ed9ea72875ca08da769829089069c2a747 a5bde77f98d55a43b2c993f4c96a952e0b68010d manual
